@@ -1,7 +1,8 @@
 # This Python file uses the following encoding: utf-8
-import sys
+import sys, json
 from pymongo import MongoClient as mongose
 from notifypy import Notify as noty
+from urllib.request import urlopen as curl
 
 from PySide6.QtWidgets import QApplication, QWidget, QMainWindow
 
@@ -44,6 +45,11 @@ class WEdit(QWidget):
         self.ui = Ui_Window()
         self.ui.setupUi(self)
         self.noty = noty()
+        with curl('https://gist.githubusercontent.com/oasis1992/05cd6604834e18e6979a286ed2fcd2e1/raw/303a0d5e9b356a67bfaff070ff746b65d010f4d5/ladas-internacionales.json') as i:
+            data = json.load(i)
+            for lada in data:
+                self.ui.lada.addItem('+' + lada['lada'])
+            self.ui.lada.setCurrentText('+52')
         
         self.items = [
             self.ui.name,
