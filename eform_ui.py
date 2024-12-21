@@ -145,11 +145,22 @@ class Ui_Widget(object):
 
         self.verticalLayout.addLayout(self.horizontalLayout_2)
 
+        self.horizontalLayout_3 = QHBoxLayout()
+        self.horizontalLayout_3.setObjectName(u"horizontalLayout_3")
         self.pushButton = QPushButton(Widget)
         self.pushButton.setObjectName(u"pushButton")
         self.pushButton.setCursor(QCursor(Qt.CursorShape.PointingHandCursor))
 
-        self.verticalLayout.addWidget(self.pushButton)
+        self.horizontalLayout_3.addWidget(self.pushButton)
+
+        self.pushButton_2 = QPushButton(Widget)
+        self.pushButton_2.setObjectName(u"pushButton_2")
+        self.pushButton_2.setCursor(QCursor(Qt.CursorShape.PointingHandCursor))
+
+        self.horizontalLayout_3.addWidget(self.pushButton_2)
+
+
+        self.verticalLayout.addLayout(self.horizontalLayout_3)
 
 
         self.retranslateUi(Widget)
@@ -181,5 +192,6 @@ class Ui_Widget(object):
 
         self.group.setPlaceholderText(QCoreApplication.translate("Widget", u"Grupo", None))
         self.pushButton.setText(QCoreApplication.translate("Widget", u"Agregar", None))
+        self.pushButton_2.setText(QCoreApplication.translate("Widget", u"Eliminar", None))
     # retranslateUi
 

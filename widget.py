@@ -1,6 +1,7 @@
 # This Python file uses the following encoding: utf-8
 import sys
 from pymongo import MongoClient as mongose
+from notifypy import Notify as noty
 
 from PySide6.QtWidgets import QApplication, QWidget, QMainWindow
 
@@ -42,6 +43,7 @@ class WEdit(QWidget):
         
         self.ui = Ui_Window()
         self.ui.setupUi(self)
+        self.noty = noty()
         
         self.items = [
             self.ui.name,
@@ -64,15 +66,19 @@ class WEdit(QWidget):
             label.hide()
         self.ui.lineEdit.hide()
         self.ui.pushButton.clicked.connect(self.updates)
+        self.ui.group.currentIndexChanged.connect(self.groupOptions)
         
     def conf(self, opt, collections):
         self.collect = collections
         self.ui.ids.setEnabled(bool(opt))
+        self.ui.pushButton_2.hide() if not bool(opt) else self.ui.pushButton_2.show()
+        self.ui.pushButton.setText('Agregar' if not bool(opt) else 'Actualizar')
         if opt == 1:
             try:
                 alias = [ i for i in self.collect.find() ]
             except:
                 alias = []
+            print(alias)
         
     def updates(self):
         var = {
@@ -83,14 +89,24 @@ class WEdit(QWidget):
             'work': self.ui.work.text(),
             'addr': self.ui.address.text(),
             'note': self.ui.notes.text(),
-            'grpo': self.ui.group.currentIndex()
+            'grpo': self.ui.group.currentText()
         }
         if var['lada'] == '':
             var['lada'] = '+52'
         if var['name'] == '' or not var['phne'].isnumeric() or len(var['phne']) != 10:
                 return
-        if self.ui.ids.isEnabled():
+        if not self.ui.ids.isEnabled():
+            k = [i for i in self.collect.find({}, {'phne': var['phne']})]
+            j = []
+            if len(k) > 0:
+                for i in k:
+                    j.append([i for i in self.collect.find({'_id': i['_id']})][0]['name'])
+                    
+                self.noty.title = 'Contactos duplicados'
+                self.noty.message = ', '.join(map(str, j)) + f' y {var["name"]} comparten el mismo número'
+                self.noty.send()
             self.collect.insert_one(var)
+            self.close()
         
     def changes(self):
         for i in range(len(self.items)):
@@ -98,6 +114,12 @@ class WEdit(QWidget):
                 self.labels[i].show()
             else:
                 self.labels[i].hide()
+                
+    def groupOptions(self):
+        if self.ui.group.currentIndex() == self.ui.group.count() - 1:
+            self.ui.lineEdit.show()
+        else:
+            self.ui.lineEdit.hide()
 
 if __name__ == "__main__":
     app = QApplication(sys.argv)
