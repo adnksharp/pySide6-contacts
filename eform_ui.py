@@ -16,14 +16,14 @@ from PySide6.QtGui import (QBrush, QColor, QConicalGradient, QCursor,
     QImage, QKeySequence, QLinearGradient, QPainter,
     QPalette, QPixmap, QRadialGradient, QTransform)
 from PySide6.QtWidgets import (QApplication, QComboBox, QGroupBox, QHBoxLayout,
-    QLabel, QLineEdit, QSizePolicy, QVBoxLayout,
-    QWidget)
+    QLabel, QLineEdit, QPushButton, QSizePolicy,
+    QVBoxLayout, QWidget)
 
 class Ui_Widget(object):
     def setupUi(self, Widget):
         if not Widget.objectName():
             Widget.setObjectName(u"Widget")
-        Widget.resize(370, 458)
+        Widget.resize(370, 491)
         self.verticalLayout = QVBoxLayout(Widget)
         self.verticalLayout.setObjectName(u"verticalLayout")
         self.ids = QComboBox(Widget)
@@ -58,18 +58,6 @@ class Ui_Widget(object):
 
         self.verticalLayout.addWidget(self.lastname)
 
-        self.label_3 = QLabel(Widget)
-        self.label_3.setObjectName(u"label_3")
-        sizePolicy.setHeightForWidth(self.label_3.sizePolicy().hasHeightForWidth())
-        self.label_3.setSizePolicy(sizePolicy)
-
-        self.verticalLayout.addWidget(self.label_3)
-
-        self.work = QLineEdit(Widget)
-        self.work.setObjectName(u"work")
-
-        self.verticalLayout.addWidget(self.work)
-
         self.groupBox = QGroupBox(Widget)
         self.groupBox.setObjectName(u"groupBox")
         sizePolicy.setHeightForWidth(self.groupBox.sizePolicy().hasHeightForWidth())
@@ -88,6 +76,18 @@ class Ui_Widget(object):
 
 
         self.verticalLayout.addWidget(self.groupBox)
+
+        self.label_3 = QLabel(Widget)
+        self.label_3.setObjectName(u"label_3")
+        sizePolicy.setHeightForWidth(self.label_3.sizePolicy().hasHeightForWidth())
+        self.label_3.setSizePolicy(sizePolicy)
+
+        self.verticalLayout.addWidget(self.label_3)
+
+        self.work = QLineEdit(Widget)
+        self.work.setObjectName(u"work")
+
+        self.verticalLayout.addWidget(self.work)
 
         self.label_4 = QLabel(Widget)
         self.label_4.setObjectName(u"label_4")
@@ -120,11 +120,36 @@ class Ui_Widget(object):
 
         self.verticalLayout.addWidget(self.label_6)
 
+        self.horizontalLayout_2 = QHBoxLayout()
+        self.horizontalLayout_2.setObjectName(u"horizontalLayout_2")
         self.group = QComboBox(Widget)
         self.group.addItem("")
+        self.group.addItem("")
+        self.group.addItem("")
+        self.group.addItem("")
+        self.group.addItem("")
         self.group.setObjectName(u"group")
+        sizePolicy1 = QSizePolicy(QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Fixed)
+        sizePolicy1.setHorizontalStretch(0)
+        sizePolicy1.setVerticalStretch(0)
+        sizePolicy1.setHeightForWidth(self.group.sizePolicy().hasHeightForWidth())
+        self.group.setSizePolicy(sizePolicy1)
 
-        self.verticalLayout.addWidget(self.group)
+        self.horizontalLayout_2.addWidget(self.group)
+
+        self.lineEdit = QLineEdit(Widget)
+        self.lineEdit.setObjectName(u"lineEdit")
+
+        self.horizontalLayout_2.addWidget(self.lineEdit)
+
+
+        self.verticalLayout.addLayout(self.horizontalLayout_2)
+
+        self.pushButton = QPushButton(Widget)
+        self.pushButton.setObjectName(u"pushButton")
+        self.pushButton.setCursor(QCursor(Qt.CursorShape.PointingHandCursor))
+
+        self.verticalLayout.addWidget(self.pushButton)
 
 
         self.retranslateUi(Widget)
@@ -138,18 +163,23 @@ class Ui_Widget(object):
         self.name.setPlaceholderText(QCoreApplication.translate("Widget", u"Nombre", None))
         self.label_2.setText(QCoreApplication.translate("Widget", u"Apellido", None))
         self.lastname.setPlaceholderText(QCoreApplication.translate("Widget", u"Apellido", None))
-        self.label_3.setText(QCoreApplication.translate("Widget", u"Empresa", None))
-        self.work.setPlaceholderText(QCoreApplication.translate("Widget", u"Empresa", None))
         self.groupBox.setTitle(QCoreApplication.translate("Widget", u"Telefono", None))
         self.lada.setPlaceholderText(QCoreApplication.translate("Widget", u"Lada", None))
         self.number.setPlaceholderText("")
+        self.label_3.setText(QCoreApplication.translate("Widget", u"Empresa", None))
+        self.work.setPlaceholderText(QCoreApplication.translate("Widget", u"Empresa", None))
         self.label_4.setText(QCoreApplication.translate("Widget", u"Direcci\u00f3n", None))
         self.address.setPlaceholderText(QCoreApplication.translate("Widget", u"Direcci\u00f3n", None))
         self.label_5.setText(QCoreApplication.translate("Widget", u"Nota", None))
         self.notes.setPlaceholderText(QCoreApplication.translate("Widget", u"Nota", None))
         self.label_6.setText(QCoreApplication.translate("Widget", u"Grupo", None))
-        self.group.setItemText(0, QCoreApplication.translate("Widget", u"Nuevo grupo", None))
+        self.group.setItemText(0, QCoreApplication.translate("Widget", u"Contactos de emergencia", None))
+        self.group.setItemText(1, QCoreApplication.translate("Widget", u"Familia", None))
+        self.group.setItemText(2, QCoreApplication.translate("Widget", u"Trabajo", None))
+        self.group.setItemText(3, QCoreApplication.translate("Widget", u"Amigos", None))
+        self.group.setItemText(4, QCoreApplication.translate("Widget", u"Nuevo grupo", None))
 
         self.group.setPlaceholderText(QCoreApplication.translate("Widget", u"Grupo", None))
+        self.pushButton.setText(QCoreApplication.translate("Widget", u"Agregar", None))
     # retranslateUi
 

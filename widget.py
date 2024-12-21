@@ -21,6 +21,7 @@ class Widget(QWidget):
         self.nw = WEdit()
         self.nw.closeEvent = self.wback
         self.db = server['myContacts']
+        self.collections = self.db['contacts']
         
         self.ui.pushButton.clicked.connect(lambda x: self.upgrades(1))
         self.ui.pushButton_2.clicked.connect(lambda x: self.upgrades(0))
@@ -28,7 +29,7 @@ class Widget(QWidget):
     def upgrades(self, opt):
         self.nw.showNormal()
         self.showMinimized()
-        self.nw.conf(opt)
+        self.nw.conf(opt, self.collections)
 
     def wback(self, event):
         self.hide()
@@ -61,9 +62,35 @@ class WEdit(QWidget):
             i.textChanged.connect(self.changes)
         for label in self.labels:
             label.hide()
+        self.ui.lineEdit.hide()
+        self.ui.pushButton.clicked.connect(self.updates)
         
-    def conf(self, opt):
-        print(opt)
+    def conf(self, opt, collections):
+        self.collect = collections
+        self.ui.ids.setEnabled(bool(opt))
+        if opt == 1:
+            try:
+                alias = [ i for i in self.collect.find() ]
+            except:
+                alias = []
+        
+    def updates(self):
+        var = {
+            'name': self.ui.name.text(),
+            'lstn': self.ui.lastname.text(),
+            'lada': self.ui.lada.currentText(),
+            'phne': self.ui.number.text(),
+            'work': self.ui.work.text(),
+            'addr': self.ui.address.text(),
+            'note': self.ui.notes.text(),
+            'grpo': self.ui.group.currentIndex()
+        }
+        if var['lada'] == '':
+            var['lada'] = '+52'
+        if var['name'] == '' or not var['phne'].isnumeric() or len(var['phne']) != 10:
+                return
+        if self.ui.ids.isEnabled():
+            self.collect.insert_one(var)
         
     def changes(self):
         for i in range(len(self.items)):

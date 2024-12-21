@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>370</width>
-    <height>458</height>
+    <height>491</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -58,26 +58,6 @@
     </widget>
    </item>
    <item>
-    <widget class="QLabel" name="label_3">
-     <property name="sizePolicy">
-      <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
-       <horstretch>0</horstretch>
-       <verstretch>0</verstretch>
-      </sizepolicy>
-     </property>
-     <property name="text">
-      <string>Empresa</string>
-     </property>
-    </widget>
-   </item>
-   <item>
-    <widget class="QLineEdit" name="work">
-     <property name="placeholderText">
-      <string>Empresa</string>
-     </property>
-    </widget>
-   </item>
-   <item>
     <widget class="QGroupBox" name="groupBox">
      <property name="sizePolicy">
       <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
@@ -104,6 +84,26 @@
        </widget>
       </item>
      </layout>
+    </widget>
+   </item>
+   <item>
+    <widget class="QLabel" name="label_3">
+     <property name="sizePolicy">
+      <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
+       <horstretch>0</horstretch>
+       <verstretch>0</verstretch>
+      </sizepolicy>
+     </property>
+     <property name="text">
+      <string>Empresa</string>
+     </property>
+    </widget>
+   </item>
+   <item>
+    <widget class="QLineEdit" name="work">
+     <property name="placeholderText">
+      <string>Empresa</string>
+     </property>
     </widget>
    </item>
    <item>
@@ -160,15 +160,58 @@
     </widget>
    </item>
    <item>
-    <widget class="QComboBox" name="group">
-     <property name="placeholderText">
-      <string>Grupo</string>
-     </property>
+    <layout class="QHBoxLayout" name="horizontalLayout_2">
      <item>
-      <property name="text">
-       <string>Nuevo grupo</string>
-      </property>
+      <widget class="QComboBox" name="group">
+       <property name="sizePolicy">
+        <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
+         <horstretch>0</horstretch>
+         <verstretch>0</verstretch>
+        </sizepolicy>
+       </property>
+       <property name="placeholderText">
+        <string>Grupo</string>
+       </property>
+       <item>
+        <property name="text">
+         <string>Contactos de emergencia</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Familia</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Trabajo</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Amigos</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Nuevo grupo</string>
+        </property>
+       </item>
+      </widget>
      </item>
+     <item>
+      <widget class="QLineEdit" name="lineEdit"/>
+     </item>
+    </layout>
+   </item>
+   <item>
+    <widget class="QPushButton" name="pushButton">
+     <property name="cursor">
+      <cursorShape>PointingHandCursor</cursorShape>
+     </property>
+     <property name="text">
+      <string>Agregar</string>
+     </property>
     </widget>
    </item>
   </layout>
