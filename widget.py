@@ -141,7 +141,11 @@ class WEdit(QWidget):
                 self.noty.message = f'{var["name"]} ya existe en el directorio.'
                 self.noty.send()
                 self.ui.name.setText('')
-        
+        else:
+            l = [i for i in self.collect.find({'name': var['name']})][0]
+            if (len(l) > 0 and l['_id'] == self.cid) or len(l) == 0:
+                self.collect.update_one({'_id': self.cid}, {'$set': var})
+                self.close()
         
     def changes(self):
         for i in range(len(self.items)):
@@ -154,7 +158,7 @@ class WEdit(QWidget):
         try:
             info = [i for i in self.collect.find({'name': self.ui.ids.currentText()})][0]
         except:
-            info = {'name': '', 'lstn': '', 'lada': '', 'phne': '', 'work': '', 'addr': '', 'note': '', 'grpo': ''}
+            info = {'_id': '', 'name': '', 'lstn': '', 'lada': '', 'phne': '', 'work': '', 'addr': '', 'note': '', 'grpo': ''}
         
         self.ui.name.setText(info['name'])
         self.ui.lastname.setText(info['lstn'])
@@ -164,6 +168,7 @@ class WEdit(QWidget):
         self.ui.address.setText(info['addr'])
         self.ui.notes.setText(info['note'])
         self.ui.group.setCurrentText(info['grpo'])
+        self.cid = info['_id']
 
 if __name__ == "__main__":
     app = QApplication(sys.argv)
