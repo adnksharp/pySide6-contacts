@@ -90,6 +90,7 @@ class WEdit(QWidget):
             label.hide()
         self.ui.lineEdit.hide()
         self.ui.pushButton.clicked.connect(self.updates)
+        self.ui.pushButton_2.clicked.connect(self.delete)
         self.ui.ids.currentIndexChanged.connect(self.uconf)
         
     def conf(self, opt, collections):
@@ -169,6 +170,10 @@ class WEdit(QWidget):
         self.ui.notes.setText(info['note'])
         self.ui.group.setCurrentText(info['grpo'])
         self.cid = info['_id']
+        
+    def delete(self):
+        self.collect.delete_one({'_id': self.cid})
+        self.close()
 
 if __name__ == "__main__":
     app = QApplication(sys.argv)
