@@ -90,18 +90,22 @@ class WEdit(QWidget):
             label.hide()
         self.ui.lineEdit.hide()
         self.ui.pushButton.clicked.connect(self.updates)
+        self.ui.ids.currentIndexChanged.connect(self.uconf)
         
     def conf(self, opt, collections):
         self.collect = collections
         self.ui.ids.setEnabled(bool(opt))
         self.ui.pushButton_2.hide() if not bool(opt) else self.ui.pushButton_2.show()
         self.ui.pushButton.setText('Agregar' if not bool(opt) else 'Actualizar')
+        self.ui.ids.clear()
         if opt == 1:
             try:
-                alias = [ i for i in self.collect.find() ]
+                alias = [i for i in self.collect.find()]
             except:
                 alias = []
-            print(alias)
+            for contact in alias:
+                self.ui.ids.addItem(contact['name'])
+        self.ui.ids.setCurrentIndex(-1)
         
     def updates(self):
         var = {
@@ -137,6 +141,20 @@ class WEdit(QWidget):
                 self.labels[i].show()
             else:
                 self.labels[i].hide()
+                
+    def uconf(self):
+        try:
+            info = [i for i in self.collect.find({'name': self.ui.ids.currentText()})][0]
+        except:
+            info = {'name': '', 'lstn': '', 'lada': '', 'phne': '', 'work': '', 'addr': '', 'note': '', 'grpo': ''}
+        self.ui.name.setText(info['name'])
+        self.ui.lastname.setText(info['lstn'])
+        self.ui.lada.setCurrentText(info['lada'])
+        self.ui.number.setText(info['phne'])
+        self.ui.work.setText(info['work'])
+        self.ui.address.setText(info['addr'])
+        self.ui.notes.setText(info['note'])
+        self.ui.group.setCurrentText(info['grpo'])
 
 if __name__ == "__main__":
     app = QApplication(sys.argv)
