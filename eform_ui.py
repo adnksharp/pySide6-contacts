@@ -127,7 +127,6 @@ class Ui_Widget(object):
         self.group.addItem("")
         self.group.addItem("")
         self.group.addItem("")
-        self.group.addItem("")
         self.group.setObjectName(u"group")
         sizePolicy1 = QSizePolicy(QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Fixed)
         sizePolicy1.setHorizontalStretch(0)
@@ -188,7 +187,6 @@ class Ui_Widget(object):
         self.group.setItemText(1, QCoreApplication.translate("Widget", u"Contactos de emergencia", None))
         self.group.setItemText(2, QCoreApplication.translate("Widget", u"Amigos", None))
         self.group.setItemText(3, QCoreApplication.translate("Widget", u"Trabajo", None))
-        self.group.setItemText(4, QCoreApplication.translate("Widget", u"Nuevo grupo", None))
 
         self.group.setPlaceholderText(QCoreApplication.translate("Widget", u"Grupo", None))
         self.pushButton.setText(QCoreApplication.translate("Widget", u"Agregar", None))

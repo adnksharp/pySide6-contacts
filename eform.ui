@@ -192,11 +192,6 @@
          <string>Trabajo</string>
         </property>
        </item>
-       <item>
-        <property name="text">
-         <string>Nuevo grupo</string>
-        </property>
-       </item>
       </widget>
      </item>
      <item>
