@@ -124,6 +124,7 @@ class WEdit(QWidget):
                 return
         if not self.ui.ids.isEnabled():
             k = [i for i in self.collect.find({'phne': var['phne']})]
+            l = [i for i in self.collect.find({'name': var['name']})]
             j = []
             if len(k) > 0:
                 for i in k:
@@ -132,8 +133,15 @@ class WEdit(QWidget):
                 self.noty.title = 'Contactos duplicados'
                 self.noty.message = ', '.join(map(str, j)) + f' y {var["name"]} comparten el mismo número'
                 self.noty.send()
-            self.collect.insert_one(var)
-            self.close()
+            if len(l) == 0:
+                self.collect.insert_one(var)
+                self.close()
+            else:
+                self.noty.title = 'Usuario no valido'
+                self.noty.message = f'{var["name"]} ya existe en el directorio.'
+                self.noty.send()
+                self.ui.name.setText('')
+        
         
     def changes(self):
         for i in range(len(self.items)):
@@ -147,6 +155,7 @@ class WEdit(QWidget):
             info = [i for i in self.collect.find({'name': self.ui.ids.currentText()})][0]
         except:
             info = {'name': '', 'lstn': '', 'lada': '', 'phne': '', 'work': '', 'addr': '', 'note': '', 'grpo': ''}
+        
         self.ui.name.setText(info['name'])
         self.ui.lastname.setText(info['lstn'])
         self.ui.lada.setCurrentText(info['lada'])
