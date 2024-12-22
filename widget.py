@@ -48,7 +48,6 @@ class Widget(QWidget):
         self.ui.tableWidget.setHorizontalHeaderLabels(['Nombre', 'Apellido', 'Número', 'Correo', 'Dirección', 'Notas', 'Grupo'])
         self.ui.tableWidget.setRowCount(len(contacts))
         for i in range(len(contacts)):
-            print(contacts[i])
             self.ui.tableWidget.setItem(i, 0, QTableWidgetItem(contacts[i]['name']))
             self.ui.tableWidget.setItem(i, 1, QTableWidgetItem(contacts[i]['lstn']))
             self.ui.tableWidget.setItem(i, 2, QTableWidgetItem(contacts[i]['lada'] + contacts[i]['phne']))
@@ -120,7 +119,7 @@ class WEdit(QWidget):
         if var['name'] == '' or not var['phne'].isnumeric() or len(var['phne']) != 10:
                 return
         if not self.ui.ids.isEnabled():
-            k = [i for i in self.collect.find({}, {'phne': var['phne']})]
+            k = [i for i in self.collect.find({'phne': var['phne']})]
             j = []
             if len(k) > 0:
                 for i in k:
