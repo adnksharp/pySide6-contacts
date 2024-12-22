@@ -95,14 +95,14 @@
       </sizepolicy>
      </property>
      <property name="text">
-      <string>Empresa</string>
+      <string>Correo</string>
      </property>
     </widget>
    </item>
    <item>
     <widget class="QLineEdit" name="work">
      <property name="placeholderText">
-      <string>Empresa</string>
+      <string>Correo</string>
      </property>
     </widget>
    </item>
@@ -174,22 +174,22 @@
        </property>
        <item>
         <property name="text">
-         <string>Contactos de emergencia</string>
-        </property>
-       </item>
-       <item>
-        <property name="text">
          <string>Familia</string>
         </property>
        </item>
        <item>
         <property name="text">
-         <string>Trabajo</string>
+         <string>Contactos de emergencia</string>
         </property>
        </item>
        <item>
         <property name="text">
          <string>Amigos</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Trabajo</string>
         </property>
        </item>
        <item>

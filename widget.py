@@ -4,7 +4,7 @@ from pymongo import MongoClient as mongose
 from notifypy import Notify as noty
 from urllib.request import urlopen as curl
 
-from PySide6.QtWidgets import QApplication, QWidget, QMainWindow
+from PySide6.QtWidgets import QApplication, QWidget, QTableWidgetItem
 
 # Important:
 # You need to run the following command to generate the ui_form.py file
@@ -28,6 +28,8 @@ class Widget(QWidget):
         self.ui.pushButton.clicked.connect(lambda x: self.upgrades(1))
         self.ui.pushButton_2.clicked.connect(lambda x: self.upgrades(0))
         
+        self.updates()
+        
     def upgrades(self, opt):
         self.nw.showNormal()
         self.showMinimized()
@@ -35,8 +37,25 @@ class Widget(QWidget):
 
     def wback(self, event):
         self.hide()
+        self.updates()
         self.show()
-        event.accept()                
+        event.accept()
+        
+    def updates(self):
+        contacts = [ i for i in self.collections.find() ]
+        
+        self.ui.tableWidget.setColumnCount(7)
+        self.ui.tableWidget.setHorizontalHeaderLabels(['Nombre', 'Apellido', 'Número', 'Correo', 'Dirección', 'Notas', 'Grupo'])
+        self.ui.tableWidget.setRowCount(len(contacts))
+        for i in range(len(contacts)):
+            print(contacts[i])
+            self.ui.tableWidget.setItem(i, 0, QTableWidgetItem(contacts[i]['name']))
+            self.ui.tableWidget.setItem(i, 1, QTableWidgetItem(contacts[i]['lstn']))
+            self.ui.tableWidget.setItem(i, 2, QTableWidgetItem(contacts[i]['lada'] + contacts[i]['phne']))
+            self.ui.tableWidget.setItem(i, 3, QTableWidgetItem(contacts[i]['work']))
+            self.ui.tableWidget.setItem(i, 4, QTableWidgetItem(contacts[i]['addr']))
+            self.ui.tableWidget.setItem(i, 5, QTableWidgetItem(contacts[i]['note']))
+            self.ui.tableWidget.setItem(i, 6, QTableWidgetItem(contacts[i]['grpo']))
 
 class WEdit(QWidget):
     def __init__(self, parent = None):
@@ -72,7 +91,6 @@ class WEdit(QWidget):
             label.hide()
         self.ui.lineEdit.hide()
         self.ui.pushButton.clicked.connect(self.updates)
-        self.ui.group.currentIndexChanged.connect(self.groupOptions)
         
     def conf(self, opt, collections):
         self.collect = collections
@@ -120,12 +138,6 @@ class WEdit(QWidget):
                 self.labels[i].show()
             else:
                 self.labels[i].hide()
-                
-    def groupOptions(self):
-        if self.ui.group.currentIndex() == self.ui.group.count() - 1:
-            self.ui.lineEdit.show()
-        else:
-            self.ui.lineEdit.hide()
 
 if __name__ == "__main__":
     app = QApplication(sys.argv)
